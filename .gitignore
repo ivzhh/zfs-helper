@@ -12,8 +12,10 @@
 *.out
 
 go.local.mod
+go.patch.mod
 goenv
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
 build/
+bin/

@@ -27,7 +27,12 @@ func main() {
 
 	log.Printf("mountpoint: %s=%s", props.Source, props.Value)
 
-	if _, _, err := libpsx.Syscall3(syscall.SYS_SETGID, uintptr(1000), 0, 0); err != 0 {
-		log.Fatalf("failed to setgid(%d): %v", 1000, err)
+	log.Printf("before: uid=%d, euid=%d", syscall.Getuid(), syscall.Geteuid())
+
+	if _, _, err := libpsx.Syscall3(syscall.SYS_SETUID, uintptr(0), 0, 0); err != 0 {
+		log.Fatalf("failed to setgid(%d): %v", 0, err)
 	}
+
+	log.Printf("after: uid=%d, euid=%d", syscall.Getuid(), syscall.Geteuid())
+
 }
